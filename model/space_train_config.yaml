@@ -1,0 +1,16 @@
+#---- MODEL PARAMETERS
+MODEL_PARAM: # input in the same order as class initialization
+  BATCH_SIZE: 30 
+  CHANNEL_SIZE: 3
+  LATENT_DIM: 16
+#---- MODEL CONFIG
+DS_PATH: '../dataset/output/encoder_decoder_train_data.pt'
+TB_PATH: '/home/etorres/Documents/in-work/training/lstm_encoder_decoder/encoder_decoder_noschedule'
+TB_COMMENT: '_our_ds'
+MODEL_OUT_PATH: '/home/etorres/Documents/in-work/models/lstm_encoder_decoder/181022-2/'
+
+#---- TRAINING PARAMETERS
+TRAIN_PARAM:
+  LEARNING_RATE: .001
+  WEIGHT_DECAY: .01
+  EPOCHS: 300
