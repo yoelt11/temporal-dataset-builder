@@ -18,6 +18,7 @@ class SpaceDecoder(nn.Module):
         #-- expansion to latent_dim
         self.linear = nn.Linear(latent_dim, latent_dim*self.middle_layers)
 
+
         #-- scale recomposition
         self.deconv_1 = nn.ConvTranspose2d(latent_dim, channel_out, kernel_size=5, stride=2, padding=1)
         self.act_1 = nn.LeakyReLU(inplace=True)
@@ -50,8 +51,17 @@ class SpaceDecoder(nn.Module):
         self.expansion_5 = nn.Linear(65*257,  (64*256//4)) # before we //4 and expand with a last comb)
         self.act_10 = nn.LeakyReLU(inplace=True)
         #-- scale combination
+        # self.comb_conv = nn.Sequential(
+        #                         nn.ConvTranspose2d(channel_out, channel_out, kernel_size=5, stride=2, padding=1),
+        #                         nn.LeakyReLU(inplace=True),
+        #                         nn.ConvTranspose2d(channel_out, channel_out, kernel_size=5, stride=1, padding=2),
+        #                         nn.LeakyReLU(inplace=True),
+        #                         nn.ConvTranspose2d(channel_out, channel_out, kernel_size=5, stride=1, padding=2),
+                            #) 
+        #self.comb_conv = nn.ConvTranspose2d(channel_out, channel_out, kernel_size=5, stride=2, padding=1)
+        #self.act_11 = nn.LeakyReLU(inplace=True)
+        #self.comb_conv2 = nn.ConvTranspose2d(channel_out, channel_out, kernel_size=5, stride=1, padding=2)
         self.comb_layer =  nn.Linear((64*256)//4,64*256)
-
     def forward(self,X):
         batch_size, latent_dim = X.shape
 
